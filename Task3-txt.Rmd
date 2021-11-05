@@ -1,0 +1,38 @@
+---
+title: "Task3-text"
+author: "Lallu Nikerthil Prathapan"
+date: "11/5/2021"
+output: word_document
+---
+
+install.packages("Rmarkdown")
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+#Average monthly maximum temperature of Germany for 12 months
+#tmin = average monthly minimum temperature (°C * 10)
+install.packages("raster")
+```{r  message = FALSE, warning = FALSE}
+library(raster)
+```
+#Gets Germany administrative boundaries and plot it
+```{r germany,echo = FALSE}
+germany<- getData("GADM",country="DEU", level=2)
+plot(germany)
+```
+#Gets the Average monthly maximum temp data from world clim and plot it
+```{r max_tem,echo = TRUE}
+max_tem<- getData("worldclim",var="tmax",res=.5,lon=10,lat=51)
+plot(max_tem)
+```
+#crops max_tem to the extend of germany
+```{r max_tem1,echo = TRUE}
+max_tem1 <-crop(max_tem,germany)
+spplot(max_tem1)
+```
+#Masks max_temp to the shape of Germany
+
+```{r max_tem2,echo = TRUE}
+max_tem2 <-mask(max_tem1,germany)
+spplot(max_tem2,main="Average monthly Maximum temperature of germany for 12 months")
+```
