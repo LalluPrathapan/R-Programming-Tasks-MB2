@@ -1,0 +1,42 @@
+---
+title: "Task2-pdf"
+author: "Lallu Nikerthil Prathapan"
+date: "11/5/2021"
+output: pdf_document
+---
+install.packages('tinytex')
+tinytex::install_tinytex()
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#Average monthly minimum temperature of India for 12 months
+install.packages("raster")
+```{r  message = FALSE, warning = FALSE}
+library(raster)
+```
+#Gets India's administrative boundaries and plot it
+```{r india,echo = TRUE}
+india<- getData("GADM",country="IND", level=2)
+plot(india)
+```
+#Gets the Average monthly minimumm temp data for india from world clim and plot it
+```{r min_temp,echo = TRUE}
+min_temp <- getData('worldclim',var='tmin',res=.5,lon=78,lat=21)
+plot(min_temp)
+
+```
+#crops min_tem to the extend of India
+```{r min_temp1,echo = TRUE}
+min_temp1 <- crop(min_temp,india)
+spplot(min_temp1)
+```
+#Masks min_temp to the shape of India
+
+```{r min_temp2,echo = TRUE}
+min_temp2 <-mask(min_temp1,india)
+spplot(min_temp2,main="Average monthly Minimum temperature of India for 12 months")
+```
+
+
+
