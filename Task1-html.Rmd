@@ -1,0 +1,20 @@
+---
+title: "Task1-html"
+author: "Lallu Nikerthil Prathapan"
+date: "11/5/2021"
+output: html_document
+---
+```{r include = FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+install.packages("viridis")
+```{r  message = FALSE, warning = FALSE}
+library(viridis)
+```
+#Magma colours
+```{r fig.cap = "Volcano,Auckland"}
+image(volcano,col =viridis(200,option="A"))
+```
+#credit-(https://github.com/stefanv)
+
