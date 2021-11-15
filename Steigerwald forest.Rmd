@@ -68,14 +68,49 @@ rt<-df[c(14,34)]
 plot(rt)
 ```
 ```{r df,echo = TRUE}
-rt<-df[c(14,34)]
-rt
-wt<-rt[,2]>0.7
-wt
-plot(df[c(14)],wt)
+
+#Plots SRTM for predefined value of NDVI
+df$L8.ndvi>0.6
+d2<-(df$L8.ndvi)>0.6
+d2
+v<-df[d2,"L8.ndvi"]
+v
+u<-df[d2,"SRTM"]
+u
+plot(u,v)
+
+```
+``````{r df,echo = TRUE}
+#Create a new dataframe with all entries but only corressponding NDVI values abouve 0.5
+
+ndvinw<-df$L8.ndvi>0.5
+df[ndvinw,]
+nw_df<-df[ndvinw,]
+nw_df
+str(nw_df)
+summary(nw_df)
+
+
 ```
 ```{r}
 
 ```
 
+
+```{r df,echo=TRUE}
+#select data where LC values below x or above y
+k<-df$X.1
+k
+m<-df$LUCAS_LC<k
+l<-df$X
+l
+n<-df$LUCAS_LC>l
+n
+r<-df[(l|n),]
+str(r)
+summary(r)
+r
+
+
+```
 
